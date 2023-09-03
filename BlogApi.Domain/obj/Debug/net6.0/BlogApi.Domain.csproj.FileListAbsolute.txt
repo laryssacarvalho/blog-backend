@@ -1,0 +1,12 @@
+C:\Users\larys\source\repos\BlogApi\BlogApi.Domain\bin\Debug\net6.0\BlogApi.Domain.deps.json
+C:\Users\larys\source\repos\BlogApi\BlogApi.Domain\bin\Debug\net6.0\BlogApi.Domain.dll
+C:\Users\larys\source\repos\BlogApi\BlogApi.Domain\bin\Debug\net6.0\BlogApi.Domain.pdb
+C:\Users\larys\source\repos\BlogApi\BlogApi.Domain\obj\Debug\net6.0\BlogApi.Domain.csproj.AssemblyReference.cache
+C:\Users\larys\source\repos\BlogApi\BlogApi.Domain\obj\Debug\net6.0\BlogApi.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\larys\source\repos\BlogApi\BlogApi.Domain\obj\Debug\net6.0\BlogApi.Domain.AssemblyInfoInputs.cache
+C:\Users\larys\source\repos\BlogApi\BlogApi.Domain\obj\Debug\net6.0\BlogApi.Domain.AssemblyInfo.cs
+C:\Users\larys\source\repos\BlogApi\BlogApi.Domain\obj\Debug\net6.0\BlogApi.Domain.csproj.CoreCompileInputs.cache
+C:\Users\larys\source\repos\BlogApi\BlogApi.Domain\obj\Debug\net6.0\BlogApi.Domain.dll
+C:\Users\larys\source\repos\BlogApi\BlogApi.Domain\obj\Debug\net6.0\refint\BlogApi.Domain.dll
+C:\Users\larys\source\repos\BlogApi\BlogApi.Domain\obj\Debug\net6.0\BlogApi.Domain.pdb
+C:\Users\larys\source\repos\BlogApi\BlogApi.Domain\obj\Debug\net6.0\ref\BlogApi.Domain.dll
