@@ -14,16 +14,14 @@ namespace BlogApi.Application.Services
             _postRepository = postRepository;
             _logger = logger;
         }
-        //published
-        //public IEnumerable<Post> GetAllPosts() => _postRepository.GetAll();
+
+        public async Task<int> AddPost(string title, string content, int authorId)
+        {
+            var newPost = new Post(title, content, authorId);
+            await _postRepository.AddAsync(newPost);
+            
+            return newPost.Id;
+        }
         
-        //ADD COMMENT TO POST
-        //GET WRITER POSTS
-        //CREATE POST (WRITER)
-        //EDIT POST (WRITER) (NOT PUBLISHED/SUBMITTED)
-        //SUBMIT POST
-
-
-
     }
 }

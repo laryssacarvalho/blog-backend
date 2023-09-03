@@ -10,6 +10,7 @@ namespace BlogApi.Infrastructure.Database
         public BlogDbContext(DbContextOptions<BlogDbContext> options) : base(options) { }
         public DbSet<Post> Posts { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Role> Roles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

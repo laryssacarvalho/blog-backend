@@ -1,3 +1,7 @@
+using BlogApi.Application.Interfaces;
+using BlogApi.Application.Services;
+using BlogApi.Domain.Entities;
+using BlogApi.Infrastructure;
 using BlogApi.Infrastructure.Database;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -9,6 +13,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<BlogDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServerConnectionString")));
+
+builder.Services.AddScoped<IRepository<Post>, Repository<Post>>();
+builder.Services.AddScoped<IPostService, PostService>();
 
 // Add services to the container.
 //builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
