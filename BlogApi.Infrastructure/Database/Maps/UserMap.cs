@@ -12,7 +12,11 @@ namespace BlogApi.Infrastructure.Database.Maps
                 .IsRequired()
                 .HasMaxLength(255);
 
-            builder.Property(u => u.Password)
+            builder.Property(u => u.PasswordHash)
+                .IsRequired()
+                .HasMaxLength(255);
+
+            builder.Property(u => u.PasswordSalt)
                 .IsRequired()
                 .HasMaxLength(255);
 

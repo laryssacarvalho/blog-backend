@@ -3,13 +3,15 @@
     public class User : Entity
     {
         public string Email { get; private set; }
-        public string Password { get; private set; }
+        public string PasswordHash { get; private set; }
+        public string PasswordSalt { get; private set; }
         public List<Role> Roles { get; set; }
 
-        public User(string email, string password)
+        public User(string email, string passwordHash, string passwordSalt)
         {
             Email = email;
-            Password = password;
+            PasswordHash = passwordHash;
+            PasswordSalt = passwordSalt;
             Roles = new();
         }
 

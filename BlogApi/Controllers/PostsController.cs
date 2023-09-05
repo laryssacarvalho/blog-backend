@@ -2,10 +2,10 @@
 using BlogApi.Requests;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace BlogApi.Controllers
-{
-    //[Authorize]
+{    
     [ApiController]
     [Route("[controller]")]
     public class PostsController : ControllerBase
@@ -19,21 +19,32 @@ namespace BlogApi.Controllers
             _postService = postService;
         }
 
-        //[Authorize(Roles = "Writer,Editor")]
+        [Authorize(Roles = "Writer,Editor")]
         [HttpPost(Name = "AddNewPost")]
         public async Task<IActionResult> Add([FromBody] NewPostRequest newPost)
         {
-            var newPostId = await _postService.AddPost(newPost.Title, newPost.Content, 1);
+            try
+            {
+                var newPostId = await _postService.AddPost(newPost.Title, newPost.Content, GetUserIdFromToken());
 
-            _logger.LogInformation($"New post added. Id: {newPostId}");
+                _logger.LogInformation($"New post added. Id: {newPostId}");
 
-            return Created($"/{newPostId}", newPost);
+                return Created($"/{newPostId}", newPost);
+            } catch(Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }            
         }
 
-        //ADD COMMENT TO POST
-        //GET WRITER POSTS
-        //CREATE POST (WRITER)
-        //EDIT POST (WRITER) (NOT PUBLISHED/SUBMITTED)
-        //SUBMIT POST
+        private int GetUserIdFromToken()
+        {
+            var userId = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+            
+            if (userId is null)
+                throw new Exception("");
+
+            return int.Parse(userId);            
+        }
     }
 }
