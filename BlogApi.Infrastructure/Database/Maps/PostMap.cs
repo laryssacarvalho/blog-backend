@@ -18,10 +18,10 @@ namespace BlogApi.Infrastructure.Database.Maps
             builder.Property(p => p.PublishedAt)
                 .IsRequired(false);
 
-            //builder.HasMany(p => p.Comments)
-            //    .WithOne(p => p.Post)
-            //    .HasForeignKey(p => p.PostId)
-            //    .OnDelete(DeleteBehavior.Cascade);
+            builder.HasMany(p => p.Comments)
+                .WithOne(p => p.Post)
+                .HasForeignKey(p => p.PostId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasOne(p => p.Author);
         }

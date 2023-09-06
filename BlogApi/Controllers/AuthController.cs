@@ -1,5 +1,6 @@
 ﻿using BlogApi.Application.Interfaces;
 using BlogApi.Requests;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogApi.Controllers
@@ -9,17 +10,15 @@ namespace BlogApi.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuthService _authService;
-        private readonly ILogger<AuthController> _logger;
-
-        public AuthController(IAuthService authService, ILogger<AuthController> logger)
+        
+        public AuthController(IAuthService authService)
         {
             _authService = authService;
-            _logger = logger;
         }
 
         [HttpPost]
         [Route("login")]
-        public async Task<IActionResult> Login(LoginRequest login)
+        public async Task<IActionResult> Login(LoginModel login)
         {
             try
             {
@@ -32,29 +31,42 @@ namespace BlogApi.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message);
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
 
         [HttpPost]
         [Route("register")]
-        public async Task<IActionResult> Register(NewUserRequest model)
+        public async Task<IActionResult> Register(NewUserModel model)
         {
             try
-            {
-                if (!ModelState.IsValid)
-                    return BadRequest("Invalid payload");
-                
+            {                
                 var newUserId = await _authService.AddNewPublicUser(model.Email, model.Password);
 
                 return Created($"/{newUserId}", model);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
+        [Authorize(Roles = "Editor")]
+        [HttpPost]
+        [Route("register-writer")]
+        public async Task<IActionResult> RegisterWriter(NewUserModel model)
+        {
+            try
+            {                
+                var newUserId = await _authService.AddNewWriterUser(model.Email, model.Password);
+
+                return Created($"/{newUserId}", model);
+            }            
+            catch (Exception ex)
+            {
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
     }
+
 }

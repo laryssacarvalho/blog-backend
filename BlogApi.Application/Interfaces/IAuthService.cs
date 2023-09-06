@@ -4,5 +4,6 @@
     {
         public Task<string> Login(string email, string password);
         public Task<int> AddNewPublicUser(string email, string password);
+        public Task<int> AddNewWriterUser(string email, string password);
     }
 }

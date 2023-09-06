@@ -2,6 +2,7 @@
 using BlogApi.Application.Interfaces;
 using BlogApi.Application.Settings;
 using BlogApi.Domain.Entities;
+using BlogApi.Domain.Enums;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -71,15 +72,25 @@ namespace BlogApi.Application.Services
 
         public async Task<int> AddNewPublicUser(string email, string password)
         {
-            var salt = PasswordHelper.GenerateSalt();            
+            return await AddNewUser(email, password, UserRole.Public);
+        }
+
+        public async Task<int> AddNewWriterUser(string email, string password)
+        {
+            return await AddNewUser(email, password, UserRole.Writer);
+        }
+
+        public async Task<int> AddNewUser(string email, string password, UserRole userRole)
+        {
+            var salt = PasswordHelper.GenerateSalt();
 
             var newUser = new User(email, PasswordHelper.HashPassword(password, salt), salt);
-            
-            var role = await _roleRepository.GetRoleByName("Public");
+
+            var role = await _roleRepository.GetRoleByName(userRole.ToString());
             newUser.AddRole(role);
 
-            await _userRepository.AddAsync(newUser);
-            
+            await _userRepository.AddUserAsync(newUser);
+
             return newUser.Id;
         }
     }
