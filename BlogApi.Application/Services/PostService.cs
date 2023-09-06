@@ -31,7 +31,7 @@ namespace BlogApi.Application.Services
             if (post is null)
                 throw new DomainException("Invalid post.");
 
-            post.AddPublicComment(new Comment(content, userId));
+            post.AddPublicComment(content, userId);
             
             await _postRepository.UpdatePostAsync(post);
         }
@@ -157,18 +157,13 @@ namespace BlogApi.Application.Services
         }
 
         public async Task RejectPostAsync(int postId, int editorId, string comment = null)
-        {
-            Comment rejectionComment = null;
-
-            if (comment is not null)
-                rejectionComment = new(comment, editorId, true);
-
+        {            
             var post = await _postRepository.GetPostByIdAsync(postId);
 
             if (post is null)
                 throw new DomainException("Invalid post.");
 
-            post.Reject(rejectionComment);
+            post.Reject(editorId, comment);
 
             await _postRepository.UpdatePostAsync(post);
         }
