@@ -4,12 +4,14 @@ using BlogApi.Requests;
 using BlogApi.Responses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 using System.Security.Claims;
 
 namespace BlogApi.Controllers
 {    
     [ApiController]
     [Route("[controller]")]
+    [Produces("application/json")]
     public class PostsController : ControllerBase
     {
         private readonly ILogger<PostsController> _logger;
@@ -23,6 +25,10 @@ namespace BlogApi.Controllers
 
         [Authorize(Roles = "Writer")]
         [HttpPost(Name = "AddNewPost")]
+        [SwaggerOperation(Summary = "Add a new post")]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Add([FromBody] NewPostModel newPost)
         {
             try
@@ -42,7 +48,11 @@ namespace BlogApi.Controllers
         }
 
         [Authorize(Roles = "Public,Writer,Editor")]
+        [SwaggerOperation(Summary = "Add a comment to a published post")]
         [HttpPost("{postId}/comments", Name = "AddNewComment")]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> AddComment(int postId, [FromBody] NewCommentModel newComment)
         {           
             try
@@ -63,6 +73,10 @@ namespace BlogApi.Controllers
 
         [Authorize(Roles = "Public,Writer,Editor")]
         [HttpGet("{id}", Name = "GetPostById")]
+        [SwaggerOperation(Summary = "Get post by id")]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetPostById(int id)
         {            
             try
@@ -81,7 +95,10 @@ namespace BlogApi.Controllers
         }
 
         [Authorize(Roles = "Public,Writer,Editor")]
-        [HttpGet()]
+        [HttpGet]
+        [SwaggerOperation(Summary = "Get all published posts")]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetAllPublishedPosts()
         {
             try
@@ -98,6 +115,10 @@ namespace BlogApi.Controllers
 
         [Authorize(Roles = "Writer")]
         [HttpPut("{id}")]
+        [SwaggerOperation(Summary = "Edit post")]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> EditPost(int id, [FromBody] NewPostModel requestBody)
         {
             try
@@ -114,29 +135,14 @@ namespace BlogApi.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, new ApiResponse(errorMessage: ex.Message));
             }
-        }
-
-        [Authorize(Roles = "Writer")]
-        [HttpGet("authors/{authorId}/posts")]
-        public async Task<IActionResult> GetPostsByAuthor(int authorId)
-        {
-            try
-            {
-                if (authorId != GetUserIdFromToken())
-                    return BadRequest(new ApiResponse(errorMessage: "A author can access only their own posts."));
-
-                var posts = await _postService.GetPostsByAuthor(GetUserIdFromToken());
-
-                return Ok(new ApiResponse(posts));
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, new ApiResponse(errorMessage: ex.Message));
-            }
-        }
+        }       
 
         [Authorize(Roles = "Writer")]
         [HttpPost("{id}/submit")]
+        [SwaggerOperation(Summary = "Submit post to approval")]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> SubmitPost(int id)
         {
             try
@@ -157,6 +163,9 @@ namespace BlogApi.Controllers
 
         [Authorize(Roles = "Editor")]
         [HttpGet("pending")]
+        [SwaggerOperation(Summary = "Get all pending posts")]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetPendingPosts()
         {
             try
@@ -173,6 +182,10 @@ namespace BlogApi.Controllers
 
         [Authorize(Roles = "Editor")]
         [HttpPost("{id}/approve")]
+        [SwaggerOperation(Summary = "Approve pending post")]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> ApprovePost(int id)
         {
             try
@@ -193,6 +206,10 @@ namespace BlogApi.Controllers
 
         [Authorize(Roles = "Editor")]
         [HttpPost("{id}/reject")]
+        [SwaggerOperation(Summary = "Reject pending post")]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> RejectPost(int id, [FromBody] RejectPostModel requestBody)
         {
             try

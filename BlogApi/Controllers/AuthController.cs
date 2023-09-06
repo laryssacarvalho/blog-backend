@@ -2,6 +2,7 @@
 using BlogApi.Requests;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace BlogApi.Controllers
 {
@@ -18,6 +19,7 @@ namespace BlogApi.Controllers
 
         [HttpPost]
         [Route("login")]
+        [SwaggerOperation(Summary = "Generate token")]
         public async Task<IActionResult> Login(LoginModel login)
         {
             try
@@ -37,6 +39,7 @@ namespace BlogApi.Controllers
 
         [HttpPost]
         [Route("register")]
+        [SwaggerOperation(Summary = "Register public user")]
         public async Task<IActionResult> Register(NewUserModel model)
         {
             try
@@ -54,6 +57,7 @@ namespace BlogApi.Controllers
         [Authorize(Roles = "Editor")]
         [HttpPost]
         [Route("register-writer")]
+        [SwaggerOperation(Summary = "Register writer user")]
         public async Task<IActionResult> RegisterWriter(NewUserModel model)
         {
             try
