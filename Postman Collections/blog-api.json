@@ -1,0 +1,261 @@
+{
+	"info": {
+		"_postman_id": "652a9bdd-824e-4f5d-8874-32370e63fd16",
+		"name": "Blog API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Public",
+			"item": [
+				{
+					"name": "Get Published Posts",
+					"_postman_id": "7fbfed4f-6c7a-4e6a-bdc5-7b4ff2951f6d",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{Blog-Token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "https://localhost:7273/posts"
+					},
+					"response": []
+				}
+			],
+			"_postman_id": "da6cda15-bcc1-4765-889c-4a225c6f453f"
+		},
+		{
+			"name": "Writer",
+			"item": [
+				{
+					"name": "Add Post",
+					"_postman_id": "d7f24ce8-7df5-41dc-9f27-a8757427b83d",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IndyaXRlciIsIm5hbWVpZCI6IjciLCJqdGkiOiI2ZDg4MTZhYi03ODRiLTRjMmItYmVmMC02ODQ2ZGVmZTgwMGMiLCJyb2xlIjpbIlB1YmxpYyIsIldyaXRlciJdLCJuYmYiOjE2OTM5NjEzMDMsImV4cCI6MTY5Mzk3MjEwMywiaWF0IjoxNjkzOTYxMzAzLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUwMDAiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjQyMDAifQ.TnGhxzpePSV8bgayVATV8e4Wu6lCl8AUBm66hd-zxbI"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"post 7\",\r\n    \"content\": \"post 7 content\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://localhost:7273/posts"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Posts By Author",
+					"_postman_id": "bcf74342-2738-42a8-b3b7-ae94f51e2f00",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IndyaXRlciIsIm5hbWVpZCI6IjciLCJqdGkiOiI2ZDg4MTZhYi03ODRiLTRjMmItYmVmMC02ODQ2ZGVmZTgwMGMiLCJyb2xlIjpbIlB1YmxpYyIsIldyaXRlciJdLCJuYmYiOjE2OTM5NjEzMDMsImV4cCI6MTY5Mzk3MjEwMywiaWF0IjoxNjkzOTYxMzAzLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUwMDAiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjQyMDAifQ.TnGhxzpePSV8bgayVATV8e4Wu6lCl8AUBm66hd-zxbI"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "https://localhost:7273/authors/7/posts"
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Post",
+					"_postman_id": "fd22aeab-5600-41bf-9591-fdba42bb0ff2",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IndyaXRlciIsIm5hbWVpZCI6IjciLCJqdGkiOiI2ZDg4MTZhYi03ODRiLTRjMmItYmVmMC02ODQ2ZGVmZTgwMGMiLCJyb2xlIjpbIlB1YmxpYyIsIldyaXRlciJdLCJuYmYiOjE2OTM5NjEzMDMsImV4cCI6MTY5Mzk3MjEwMywiaWF0IjoxNjkzOTYxMzAzLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUwMDAiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjQyMDAifQ.TnGhxzpePSV8bgayVATV8e4Wu6lCl8AUBm66hd-zxbI"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"edit title\",\r\n    \"content\": \"edit content\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://localhost:7273/posts/11"
+					},
+					"response": []
+				},
+				{
+					"name": "Submit Post",
+					"_postman_id": "7ff12227-4c95-4148-8a26-7f988d468e0c",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IndyaXRlciIsIm5hbWVpZCI6IjciLCJqdGkiOiI2ZDg4MTZhYi03ODRiLTRjMmItYmVmMC02ODQ2ZGVmZTgwMGMiLCJyb2xlIjpbIlB1YmxpYyIsIldyaXRlciJdLCJuYmYiOjE2OTM5NjEzMDMsImV4cCI6MTY5Mzk3MjEwMywiaWF0IjoxNjkzOTYxMzAzLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUwMDAiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjQyMDAifQ.TnGhxzpePSV8bgayVATV8e4Wu6lCl8AUBm66hd-zxbI"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"url": "https://localhost:7273/posts/11/submit"
+					},
+					"response": []
+				}
+			],
+			"_postman_id": "218faddf-15e4-48c0-a1ed-91b334dca902"
+		},
+		{
+			"name": "Editor",
+			"item": [
+				{
+					"name": "Get Pending Posts",
+					"_postman_id": "b7041845-3fe9-48bb-8058-035674929df0",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVkaXRvciIsIm5hbWVpZCI6IjYiLCJqdGkiOiJjMGYxMTg4OS1iOTA2LTRlMDctOTAyNC05YzBlYWNkZTdhMjYiLCJyb2xlIjpbIlB1YmxpYyIsIkVkaXRvciJdLCJuYmYiOjE2OTM5NjIwNDEsImV4cCI6MTY5Mzk3Mjg0MSwiaWF0IjoxNjkzOTYyMDQxLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUwMDAiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjQyMDAifQ.IZQsM6qFkql8bqIwU44BESgl4knrpnT7aGI2AO3GbJg"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "https://localhost:7273/posts/pending"
+					},
+					"response": []
+				},
+				{
+					"name": "Approve Post",
+					"_postman_id": "602be78b-3520-428c-8d3d-c031cf7441e1",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVkaXRvciIsIm5hbWVpZCI6IjYiLCJqdGkiOiJjMGYxMTg4OS1iOTA2LTRlMDctOTAyNC05YzBlYWNkZTdhMjYiLCJyb2xlIjpbIlB1YmxpYyIsIkVkaXRvciJdLCJuYmYiOjE2OTM5NjIwNDEsImV4cCI6MTY5Mzk3Mjg0MSwiaWF0IjoxNjkzOTYyMDQxLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUwMDAiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjQyMDAifQ.IZQsM6qFkql8bqIwU44BESgl4knrpnT7aGI2AO3GbJg"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"url": "https://localhost:7273/posts/11/approve"
+					},
+					"response": []
+				},
+				{
+					"name": "Reject Post",
+					"_postman_id": "526af4c5-7b91-4ba9-bacb-d3d7955d8bfd",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVkaXRvciIsIm5hbWVpZCI6IjYiLCJqdGkiOiJjMGYxMTg4OS1iOTA2LTRlMDctOTAyNC05YzBlYWNkZTdhMjYiLCJyb2xlIjpbIlB1YmxpYyIsIkVkaXRvciJdLCJuYmYiOjE2OTM5NjIwNDEsImV4cCI6MTY5Mzk3Mjg0MSwiaWF0IjoxNjkzOTYyMDQxLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUwMDAiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjQyMDAifQ.IZQsM6qFkql8bqIwU44BESgl4knrpnT7aGI2AO3GbJg"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"comment\": \"comment reject\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://localhost:7273/posts/11/reject"
+					},
+					"response": []
+				}
+			],
+			"_postman_id": "5efa3d72-d8f7-47a4-b83a-eadd3c0bd600"
+		},
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6cf600b4-bd18-4a26-bf53-fa765a2f1915",
+						"exec": [
+							"const token = responseBody;\r",
+							"postman.setEnvironmentVariable(\"Blog-Token\", token);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"_postman_id": "e5918189-78d5-49fa-8dc0-0259e8f41351",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"public\",\r\n    \"password\": \"public\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://localhost:7273/auth/login"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Post By Id",
+			"_postman_id": "18192270-9379-4543-a182-8364157b5b84",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IndyaXRlciIsIm5hbWVpZCI6IjciLCJqdGkiOiI2ZDg4MTZhYi03ODRiLTRjMmItYmVmMC02ODQ2ZGVmZTgwMGMiLCJyb2xlIjpbIlB1YmxpYyIsIldyaXRlciJdLCJuYmYiOjE2OTM5NjEzMDMsImV4cCI6MTY5Mzk3MjEwMywiaWF0IjoxNjkzOTYxMzAzLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUwMDAiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjQyMDAifQ.TnGhxzpePSV8bgayVATV8e4Wu6lCl8AUBm66hd-zxbI"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "https://localhost:7273/posts/11"
+			},
+			"response": []
+		}
+	]
+}
