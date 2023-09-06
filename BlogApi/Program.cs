@@ -1,62 +1,49 @@
-using BlogApi.Application.Interfaces;
-using BlogApi.Application.Services;
-using BlogApi.Application.Settings;
-using BlogApi.Domain.Entities;
+
+using BlogApi.Application;
 using BlogApi.Infrastructure;
 using BlogApi.Infrastructure.Database;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
 
-var builder = WebApplication.CreateBuilder(args);
-
-builder.Services.AddDbContext<BlogDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServerConnectionString")));
-
-builder.Services.AddScoped<IRepository<Post>, Repository<Post>>();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IRoleRepository, RoleRepository>();
-builder.Services.AddScoped<IPostService, PostService>();
-builder.Services.AddScoped<IAuthService, AuthService>();
-builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("JWT"));
-
-// Add services to the container.
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
-    {
-        options.SaveToken = true;
-        options.RequireHttpsMetadata = false;
-        options.TokenValidationParameters = new TokenValidationParameters()
-        {
-            ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidAudience = builder.Configuration["JWT:ValidAudience"],
-            ValidIssuer = builder.Configuration["JWT:ValidIssuer"],
-            ClockSkew = TimeSpan.Zero,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Secret"]))
-        };
-    });
-
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+namespace BlogApi 
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    static class Program
+    {
+        static void Main(string[] args)
+        {
+            var builder = WebApplication.CreateBuilder(args);
+
+            ConfigurationManager configuration = builder.Configuration;
+
+            builder.Services.AddApplicationConfiguration(configuration)
+                .AddInfrastructureConfiguration(configuration)
+                .AddWebApiConfiguration(configuration);
+
+            var app = builder.Build();
+            
+            if (app.Environment.IsDevelopment())
+            {
+                app.UseSwagger();
+                app.UseSwaggerUI();
+            }
+
+            app.UseHttpsRedirection();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
+
+            app.MapControllers();
+
+            ApplyMigrations(app);
+
+            app.Run();
+        }
+
+        private static void ApplyMigrations(WebApplication app)
+        {
+            using var scope = app.Services.CreateScope();
+            var services = scope.ServiceProvider;
+            var context = services.GetRequiredService<BlogDbContext>();
+            context.Database.Migrate();
+        }
+    }
 }
-
-app.UseHttpsRedirection();
-
-app.UseAuthentication();
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.Run();

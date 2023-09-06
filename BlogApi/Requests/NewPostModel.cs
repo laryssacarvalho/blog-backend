@@ -2,7 +2,7 @@
 
 namespace BlogApi.Requests
 {
-    public class NewPostRequest
+    public class NewPostModel
     {
         [Required]
         public string Title { get; set; }
