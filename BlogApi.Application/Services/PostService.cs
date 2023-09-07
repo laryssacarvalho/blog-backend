@@ -45,6 +45,7 @@ namespace BlogApi.Application.Services
                 Content = p.Content,
                 PublishedAt = p.PublishedAt,
                 Title = p.Title,
+                Status = p.Status,
                 Comments = p.Comments.Select(c => new CommentDto
                 {
                     Content = c.Content,
@@ -67,6 +68,7 @@ namespace BlogApi.Application.Services
                 Content = post.Content,
                 PublishedAt = post.PublishedAt,
                 Title = post.Title,
+                Status = post.Status,
                 Comments = post.Comments.FindAll(c => !c.IsRejection).Select(c => new CommentDto
                 {
                     Content = c.Content,
@@ -100,6 +102,7 @@ namespace BlogApi.Application.Services
                 Content = p.Content,
                 PublishedAt = p.PublishedAt,
                 Title = p.Title,
+                Status = p.Status,
                 Comments = p.Comments.FindAll(c => !c.IsRejection).Select(c => new CommentDto
                 {
                     Content = c.Content,
@@ -134,6 +137,7 @@ namespace BlogApi.Application.Services
                 Content = p.Content,
                 PublishedAt = p.PublishedAt,
                 Title = p.Title,
+                Status = p.Status,
                 Comments = p.Comments.FindAll(c => !c.IsRejection).Select(c => new CommentDto
                 {
                     Content = c.Content,
