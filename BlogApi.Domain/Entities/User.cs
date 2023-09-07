@@ -5,7 +5,7 @@
         public string Email { get; private set; }
         public string PasswordHash { get; private set; }
         public string PasswordSalt { get; private set; }
-        public List<Role> Roles { get; set; }
+        public List<Role> Roles { get; private set; }
 
         public User(string email, string passwordHash, string passwordSalt)
         {

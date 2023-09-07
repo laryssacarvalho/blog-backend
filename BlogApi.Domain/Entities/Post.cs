@@ -44,12 +44,12 @@ namespace BlogApi.Domain.Entities
             Content = newContent;
         }
 
-        public void AddPublicComment(Comment comment)
-        {
+        public void AddPublicComment(string comment, int userId)
+        {            
             if (Status != PostStatus.Published)
                 throw new DomainException("Comments can be added only to published posts.");
 
-            Comments.Add(comment);
+            Comments.Add(new Comment(comment, userId));
         }
 
         public void Submit() 
@@ -69,13 +69,13 @@ namespace BlogApi.Domain.Entities
             PublishedAt = DateTime.UtcNow;
         }
 
-        public void Reject(Comment comment = null) 
+        public void Reject(int userId, string comment = null) 
         {
             if (Status != PostStatus.Pending)
                 throw new DomainException("This post was not submitted yet.");
 
             if (comment is not null)
-                Comments.Add(comment);
+                Comments.Add(new Comment(comment, userId, true));
 
             Status = PostStatus.Rejected;
         }
