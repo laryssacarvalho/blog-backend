@@ -14,7 +14,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlogApi.Infrastructure", "B
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlogApi.Application", "BlogApi.Application\BlogApi.Application.csproj", "{F1FA3E4B-EBE0-46A7-B0BA-64A4000EB65F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogApi.Tests", "BlogApi.Tests\BlogApi.Tests.csproj", "{AAADB54A-C0D9-4879-B6C8-D6BB5689E0D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlogApi.Tests", "BlogApi.Tests\BlogApi.Tests.csproj", "{AAADB54A-C0D9-4879-B6C8-D6BB5689E0D9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{672DD994-724D-47FB-A05E-31C1EBFEC417}"
+	ProjectSection(SolutionItems) = preProject
+		index.html = index.html
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
