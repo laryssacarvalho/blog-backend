@@ -1,0 +1,739 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+      "title": "BlogApi",
+      "version": "1.0"
+    },
+    "paths": {
+      "/Auth/login": {
+        "post": {
+          "tags": [
+            "Auth"
+          ],
+          "summary": "Generate token",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginModel"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginModel"
+                }
+              },
+              "application/*+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginModel"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Success"
+            }
+          }
+        }
+      },
+      "/Auth/register": {
+        "post": {
+          "tags": [
+            "Auth"
+          ],
+          "summary": "Register public user",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NewUserModel"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NewUserModel"
+                }
+              },
+              "application/*+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NewUserModel"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Success"
+            }
+          }
+        }
+      },
+      "/Auth/register-writer": {
+        "post": {
+          "tags": [
+            "Auth"
+          ],
+          "summary": "Register writer user",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NewUserModel"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NewUserModel"
+                }
+              },
+              "application/*+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NewUserModel"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Success"
+            }
+          }
+        }
+      },
+      "/Authors/{authorId}/posts": {
+        "get": {
+          "tags": [
+            "Authors"
+          ],
+          "summary": "Get all posts by author id",
+          "parameters": [
+            {
+              "name": "authorId",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ApiResponse"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad Request",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ApiResponse"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Server Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ApiResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/Posts": {
+        "post": {
+          "tags": [
+            "Posts"
+          ],
+          "summary": "Add a new post",
+          "operationId": "AddNewPost",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NewPostModel"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NewPostModel"
+                }
+              },
+              "application/*+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NewPostModel"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Created",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ApiResponse"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad Request",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ApiResponse"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Server Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ApiResponse"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "get": {
+          "tags": [
+            "Posts"
+          ],
+          "summary": "Get all published posts",
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ApiResponse"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Server Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ApiResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/Posts/{postId}/comments": {
+        "post": {
+          "tags": [
+            "Posts"
+          ],
+          "summary": "Add a comment to a published post",
+          "operationId": "AddNewComment",
+          "parameters": [
+            {
+              "name": "postId",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NewCommentModel"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NewCommentModel"
+                }
+              },
+              "application/*+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NewCommentModel"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ApiResponse"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad Request",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ApiResponse"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Server Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ApiResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/Posts/{id}": {
+        "get": {
+          "tags": [
+            "Posts"
+          ],
+          "summary": "Get post by id",
+          "operationId": "GetPostById",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ApiResponse"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad Request",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ApiResponse"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Server Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ApiResponse"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "put": {
+          "tags": [
+            "Posts"
+          ],
+          "summary": "Edit post",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NewPostModel"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NewPostModel"
+                }
+              },
+              "application/*+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NewPostModel"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ApiResponse"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad Request",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ApiResponse"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Server Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ApiResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/Posts/{id}/submit": {
+        "post": {
+          "tags": [
+            "Posts"
+          ],
+          "summary": "Submit post to approval",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ApiResponse"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad Request",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ApiResponse"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Server Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ApiResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/Posts/pending": {
+        "get": {
+          "tags": [
+            "Posts"
+          ],
+          "summary": "Get all pending posts",
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ApiResponse"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Server Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ApiResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/Posts/{id}/approve": {
+        "post": {
+          "tags": [
+            "Posts"
+          ],
+          "summary": "Approve pending post",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ApiResponse"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad Request",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ApiResponse"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Server Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ApiResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/Posts/{id}/reject": {
+        "post": {
+          "tags": [
+            "Posts"
+          ],
+          "summary": "Reject pending post",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RejectPostModel"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RejectPostModel"
+                }
+              },
+              "application/*+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RejectPostModel"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ApiResponse"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad Request",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ApiResponse"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Server Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ApiResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "ApiResponse": {
+          "type": "object",
+          "properties": {
+            "success": {
+              "type": "boolean"
+            },
+            "data": {
+              "nullable": true
+            },
+            "errorMessage": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          "additionalProperties": false
+        },
+        "LoginModel": {
+          "type": "object",
+          "properties": {
+            "email": {
+              "type": "string",
+              "nullable": true
+            },
+            "password": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          "additionalProperties": false
+        },
+        "NewCommentModel": {
+          "type": "object",
+          "properties": {
+            "content": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          "additionalProperties": false
+        },
+        "NewPostModel": {
+          "required": [
+            "content",
+            "title"
+          ],
+          "type": "object",
+          "properties": {
+            "title": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "content": {
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "NewUserModel": {
+          "required": [
+            "email",
+            "password"
+          ],
+          "type": "object",
+          "properties": {
+            "email": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "password": {
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "RejectPostModel": {
+          "type": "object",
+          "properties": {
+            "comment": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "securitySchemes": {
+        "Bearer": {
+          "type": "apiKey",
+          "name": "Authorization",
+          "in": "header"
+        }
+      }
+    },
+    "security": [
+      {
+        "Bearer": [ ]
+      }
+    ]
+  }
