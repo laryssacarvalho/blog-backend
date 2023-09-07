@@ -11,10 +11,12 @@ namespace BlogApi.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuthService _authService;
-        
-        public AuthController(IAuthService authService)
+        private readonly ILogger<AuthController> _logger;
+
+        public AuthController(IAuthService authService, ILogger<AuthController> logger)
         {
             _authService = authService;
+            _logger = logger;
         }
 
         [HttpPost]
@@ -33,6 +35,7 @@ namespace BlogApi.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, ex.Message);
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
@@ -50,6 +53,7 @@ namespace BlogApi.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, ex.Message);
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
@@ -68,6 +72,7 @@ namespace BlogApi.Controllers
             }            
             catch (Exception ex)
             {
+                _logger.LogError(ex, ex.Message);
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }

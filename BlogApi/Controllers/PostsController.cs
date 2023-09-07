@@ -39,10 +39,12 @@ namespace BlogApi.Controllers
 
             } catch(DomainException ex)
             {
+                _logger.LogError(ex, ex.Message);
                 return BadRequest(new ApiResponse(errorMessage: ex.Message));
             }
             catch(Exception ex)
             {
+                _logger.LogError(ex, ex.Message);
                 return StatusCode(StatusCodes.Status500InternalServerError, new ApiResponse(errorMessage: ex.Message));
             }            
         }
@@ -63,10 +65,12 @@ namespace BlogApi.Controllers
             }
             catch (DomainException ex)
             {
+                _logger.LogError(ex, ex.Message);
                 return BadRequest(new ApiResponse(errorMessage: ex.Message));
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, ex.Message);
                 return StatusCode(StatusCodes.Status500InternalServerError, new ApiResponse(errorMessage: ex.Message));
             }
         }
@@ -90,6 +94,7 @@ namespace BlogApi.Controllers
             }            
             catch (Exception ex)
             {
+                _logger.LogError(ex, ex.Message);
                 return StatusCode(StatusCodes.Status500InternalServerError, new ApiResponse(errorMessage: ex.Message));
             }
         }
@@ -109,6 +114,7 @@ namespace BlogApi.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, ex.Message);
                 return StatusCode(StatusCodes.Status500InternalServerError, new ApiResponse(errorMessage: ex.Message));
             }
         }
@@ -129,10 +135,12 @@ namespace BlogApi.Controllers
             }
             catch (DomainException ex)
             {
+                _logger.LogError(ex, ex.Message);
                 return BadRequest(new ApiResponse(errorMessage: ex.Message));
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, ex.Message);
                 return StatusCode(StatusCodes.Status500InternalServerError, new ApiResponse(errorMessage: ex.Message));
             }
         }       
@@ -153,10 +161,12 @@ namespace BlogApi.Controllers
             }
             catch (DomainException ex)
             {
+                _logger.LogError(ex, ex.Message);
                 return BadRequest(new ApiResponse(errorMessage: ex.Message));
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, ex.Message);
                 return StatusCode(StatusCodes.Status500InternalServerError, new ApiResponse(errorMessage: ex.Message));
             }
         }
@@ -176,6 +186,7 @@ namespace BlogApi.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, ex.Message);
                 return StatusCode(StatusCodes.Status500InternalServerError, new ApiResponse(errorMessage: ex.Message));
             }
         }
@@ -196,10 +207,12 @@ namespace BlogApi.Controllers
             }
             catch (DomainException ex)
             {
+                _logger.LogError(ex, ex.Message);
                 return BadRequest(new ApiResponse(errorMessage: ex.Message));
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, ex.Message);
                 return StatusCode(StatusCodes.Status500InternalServerError, new ApiResponse(errorMessage: ex.Message));
             }
         }
@@ -220,10 +233,12 @@ namespace BlogApi.Controllers
             }
             catch (DomainException ex)
             {
+                _logger.LogError(ex, ex.Message);
                 return BadRequest(new ApiResponse(errorMessage: ex.Message));
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, ex.Message);
                 return StatusCode(StatusCodes.Status500InternalServerError, new ApiResponse(errorMessage: ex.Message));
             }
         }
