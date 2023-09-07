@@ -60,6 +60,7 @@ If you are using the API deployed in Azure, you can use the following user crede
 #### On your machine
 
 After cloning this repository you will need to run the *roles.sql* from the Scripts folder on your database to create the user roles. 
+If you want to use the same sample users provided above, run the *users.sql* on your database as well.
 
 Then execute the following commands on the root folder:
 
