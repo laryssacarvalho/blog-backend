@@ -10,6 +10,7 @@ namespace BlogApi.Application.Dtos
         public DateTime? PublishedAt { get; set; }
         public IEnumerable<CommentDto> Comments { get; set; }
         public PostStatus Status { get; set; }
+        public int AuthorId { get; set; }
     }
 
     public class CommentDto

@@ -46,6 +46,7 @@ namespace BlogApi.Application.Services
                 PublishedAt = p.PublishedAt,
                 Title = p.Title,
                 Status = p.Status,
+                AuthorId = p.AuthorId,
                 Comments = p.Comments.Select(c => new CommentDto
                 {
                     Content = c.Content,
@@ -58,7 +59,7 @@ namespace BlogApi.Application.Services
         public async Task<PostDto> GetPostById(int postId)
         {
             var post = await _postRepository.GetPostByIdAsync(postId);
-
+            
             if (post is null)
                 return null;
 
@@ -69,6 +70,7 @@ namespace BlogApi.Application.Services
                 PublishedAt = post.PublishedAt,
                 Title = post.Title,
                 Status = post.Status,
+                AuthorId = post.AuthorId,
                 Comments = post.Comments.FindAll(c => !c.IsRejection).Select(c => new CommentDto
                 {
                     Content = c.Content,
@@ -103,6 +105,7 @@ namespace BlogApi.Application.Services
                 PublishedAt = p.PublishedAt,
                 Title = p.Title,
                 Status = p.Status,
+                AuthorId = p.AuthorId,
                 Comments = p.Comments.FindAll(c => !c.IsRejection).Select(c => new CommentDto
                 {
                     Content = c.Content,
@@ -138,6 +141,7 @@ namespace BlogApi.Application.Services
                 PublishedAt = p.PublishedAt,
                 Title = p.Title,
                 Status = p.Status,
+                AuthorId = p.AuthorId,
                 Comments = p.Comments.FindAll(c => !c.IsRejection).Select(c => new CommentDto
                 {
                     Content = c.Content,
