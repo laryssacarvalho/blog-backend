@@ -1,5 +1,7 @@
 ﻿using BlogApi.Application.Interfaces;
+using BlogApi.Domain.Exceptions;
 using BlogApi.Requests;
+using BlogApi.Responses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -31,12 +33,17 @@ namespace BlogApi.Controllers
 
                 var token = await _authService.Login(login.Email, login.Password);
                 
-                return Ok(token);
+                return Ok(new ApiResponse(new { token }));
+            }
+            catch (DomainException ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                return BadRequest(new ApiResponse(errorMessage: ex.Message));
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, ex.Message);
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, new ApiResponse(errorMessage: ex.Message));
             }
         }
 
@@ -51,10 +58,15 @@ namespace BlogApi.Controllers
 
                 return Created($"/{newUserId}", model);
             }
+            catch (DomainException ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                return BadRequest(new ApiResponse(errorMessage: ex.Message));
+            }
             catch (Exception ex)
             {
                 _logger.LogError(ex, ex.Message);
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, new ApiResponse(errorMessage: ex.Message));
             }
         }
 
@@ -69,11 +81,16 @@ namespace BlogApi.Controllers
                 var newUserId = await _authService.AddNewWriterUser(model.Email, model.Password);
 
                 return Created($"/{newUserId}", model);
-            }            
+            }
+            catch (DomainException ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                return BadRequest(new ApiResponse(errorMessage: ex.Message));
+            }
             catch (Exception ex)
             {
                 _logger.LogError(ex, ex.Message);
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, new ApiResponse(errorMessage: ex.Message));
             }
         }
     }
