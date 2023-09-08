@@ -71,7 +71,7 @@ namespace BlogApi.Application.Services
                 Title = post.Title,
                 Status = post.Status,
                 AuthorId = post.AuthorId,
-                Comments = post.Comments.FindAll(c => !c.IsRejection).Select(c => new CommentDto
+                Comments = post.Comments.Select(c => new CommentDto
                 {
                     Content = c.Content,
                     IsRejection = c.IsRejection
