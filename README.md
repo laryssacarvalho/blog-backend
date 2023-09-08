@@ -29,6 +29,8 @@ The application has 3 types of user:
 
 Detailed documentation of the API endpoints -> [API documentation](https://laryssacarvalho.github.io/blog-backend/)
 
+ There is also a simple frontend application that uses this API ([click here](https://github.com/laryssacarvalho/blog-frontend) to access the frontend repository).
+
 ## Built With
 
 The project was built using a Web API from [.NET 6](https://dotnet.microsoft.com/en-us/) and a SQL Server database.
@@ -45,6 +47,10 @@ You can also run this project on your machine.
 
 If you are going to execute the project on your machine, then you will need to install [.NET](https://dotnet.microsoft.com/en-us/download) and a SQL Server.
 
+This is not a actually a dependency (since you can make requests directly to the endpoint) but if you want, you can execute the frontend application to see both of them running together (check the project documentation to see how to execute it):
+
+* [Frontend project](https://github.com/laryssacarvalho/blog-frontend)
+  
 ### Execution
 
 #### Sample credentials
