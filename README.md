@@ -29,7 +29,7 @@ The application has 3 types of user:
 
 Detailed documentation of the API endpoints -> [API documentation](https://laryssacarvalho.github.io/blog-backend/)
 
- There is also a simple frontend application that uses this API ([click here](https://github.com/laryssacarvalho/blog-frontend) to access the frontend repository).
+There is also a simple frontend application that uses this API ([click here](https://github.com/laryssacarvalho/blog-frontend) to access the frontend repository).
 
 ## Built With
 
@@ -39,7 +39,7 @@ I chose .NET because it's the backend framework I have the most experience with.
 
 ## Getting Started
 
-This project is deployed using an Azure App Service, so you can make the requests to the following URL: https://laryssablog.azurewebsites.net/
+~~This project is deployed using an Azure App Service, so you can make the requests to the following URL: https://laryssablog.azurewebsites.net/~~
 
 You can also run this project on your machine.
 
